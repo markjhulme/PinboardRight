@@ -3,15 +3,12 @@ var pinlink = chrome.contextMenus.create({"title": "&Post Link to Pinboard","con
 function postpinlink(info, tab) {
   var u=info.pageUrl
   var l=info.linkUrl
-//  var p=l(document.title)
-//  var q=anchor.getAttribute(l)
   var t=info.linkUrl
-//  if(t>0){t=info.selectionText;}else{t=info.linkUrl;}
   var posturl="https://pinboard.in/add?url=URLTEXT+&description=Original link found at:  FOUNDAT+&title=TTLTEXT";
   chrome.windows.create({"url":posturl.
      replace("URLTEXT", encodeURIComponent(l)).
      replace("FOUNDAT", encodeURIComponent(u)).
-	 replace("TTLTEXT", encodeURIComponent(t)), "type":"popup", "height":350,"width":700});	 
+	 replace("TTLTEXT", encodeURIComponent(t)), "type":"popup", "height":550,"width":700});	 
 }
 
 
@@ -19,10 +16,10 @@ var pinpage = chrome.contextMenus.create({"title": "&Post Page to Pinboard","con
 function postpinpage(info, tab) {
   var u=info.pageUrl
   var t=tab.title
-  var posturl="https://pinboard.in/add?url=URLTEXT+&title=TTLTEXT";
+  var posturl="https://pinboard.in/add?url=URLTEXT+&description=+&title=TTLTEXT";
     chrome.windows.create({"url":posturl.
      replace("URLTEXT", encodeURIComponent(u)).
-     replace("TTLTEXT", encodeURIComponent(t)), "type":"popup", "height":350,"width":700});
+     replace("TTLTEXT", encodeURIComponent(t)), "type":"popup", "height":550,"width":700});
 }
 
 
@@ -35,20 +32,5 @@ function postpintext(info, tab) {
   chrome.windows.create({"url":posturl.
      replace("URLTEXT", encodeURIComponent(u)).
      replace("TTLTEXT", encodeURIComponent(t)).
-     replace("SELTEXT", encodeURIComponent(s)), "type":"popup", "height":350,"width":700});
+     replace("SELTEXT", encodeURIComponent(s)), "type":"popup", "height":550,"width":700});
 }
-
-
-
-
-
-
-//var readpage = chrome.contextMenus.create({"title": "&Read Later on Pinboard", "contexts":["page"], "onclick": postreadpage});
-//function postreadpage(info, tab) {
-//  var u=info.pageUrl
-//  var t=tab.title
-//  var posturl="https://pinboard.in/add?later=yes&noui=yes&jump=close&url=URLTEXT+&title=TTLTEXT";
-//    chrome.windows.create({"url":posturl.
-//     replace("URLTEXT", encodeURIComponent(u)).
-//     replace("TTLTEXT", encodeURIComponent(t)), "type":"popup", "height":100,"width":100});
-//}
