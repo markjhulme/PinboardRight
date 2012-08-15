@@ -1,36 +1,25 @@
 
-var pinlink = chrome.contextMenus.create({"title": "&Post Link to Pinboard","contexts":["link"], "onclick": postpinlink});
-function postpinlink(info, tab) {
-  var u=info.pageUrl
-  var l=info.linkUrl
-  var t=info.linkUrl
-  var posturl="https://pinboard.in/add?url=URLTEXT+&description=Original link found at:  FOUNDAT+&title=TTLTEXT";
-  chrome.windows.create({"url":posturl.
-     replace("URLTEXT", encodeURIComponent(l)).
-     replace("FOUNDAT", encodeURIComponent(u)).
-	 replace("TTLTEXT", encodeURIComponent(t)), "type":"popup", "height":550,"width":700});	 
+chrome.contextMenus.create({"title": "&Post Link to Pinboard","contexts":["link"], "onclick": postlink});
+
+function postlink(info, tab) {
+  var q=info.linkUrl;
+  var d=info.pageUrl;
+  var p=info.linkUrl;
+  void(open('https://pinboard.in/add?url='+encodeURIComponent(q)+'&description= Original link found at:  '+encodeURIComponent(d)+'&title='+encodeURIComponent(p),'Pinboard','toolbar=no,width=700,height=550'));
 }
 
+chrome.contextMenus.create({"title": "&Post Page to Pinboard","contexts":["page"], "onclick": postpin});
 
-var pinpage = chrome.contextMenus.create({"title": "&Post Page to Pinboard","contexts":["page"], "onclick": postpinpage});
-function postpinpage(info, tab) {
-  var u=info.pageUrl
-  var t=tab.title
-  var posturl="https://pinboard.in/add?url=URLTEXT+&description=+&title=TTLTEXT";
-    chrome.windows.create({"url":posturl.
-     replace("URLTEXT", encodeURIComponent(u)).
-     replace("TTLTEXT", encodeURIComponent(t)), "type":"popup", "height":550,"width":700});
-}
+chrome.contextMenus.create({"title": "&Post Selection to Pinboard","contexts":["selection"], "onclick": postpin});
 
-
-var pintext = chrome.contextMenus.create({"title": "&Post Selection to Pinboard","contexts":["selection"], "onclick": postpintext});
-function postpintext(info, tab) {
-  var u=info.pageUrl
-  var t=tab.title
-  var s=info.selectionText
-  var posturl="https://pinboard.in/add?url=URLTEXT+&description=SELTEXT+&title=TTLTEXT";
-  chrome.windows.create({"url":posturl.
-     replace("URLTEXT", encodeURIComponent(u)).
-     replace("TTLTEXT", encodeURIComponent(t)).
-     replace("SELTEXT", encodeURIComponent(s)), "type":"popup", "height":550,"width":700});
+function postpin(info, tab) {
+  var q=info.pageUrl;
+  if(info.selectionText){
+    var d=info.selectionText;
+	}
+	else{
+	d='';
+	};
+  var p=tab.title;
+  void(open('https://pinboard.in/add?url='+encodeURIComponent(q)+'&description='+encodeURIComponent(d)+'&title='+encodeURIComponent(p),'Pinboard','toolbar=no,width=700,height=550'));
 }
